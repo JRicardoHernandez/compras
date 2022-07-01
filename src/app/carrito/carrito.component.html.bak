@@ -1,0 +1,76 @@
+<div class="row">
+	<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pt-3 pb-3">
+		<div class="card">
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-sm">
+					  <thead>
+						<tr>
+						  <th scope="col">#</th>
+						  <th scope="col">Items</th>
+						  <th scope="col">Description</th>
+						  <th scope="col" *ngIf="!deviceMovil">Type</th>
+						  <th scope="col" *ngIf="!deviceMovil">Time of travel</th>
+						  <!-- <th scope="col">Unit Price</th> -->
+						  <th scope="col">Price</th>
+						  <th scope="col" *ngIf="!deviceMovil">Status</th>
+						  <th scope="col"></th>
+						</tr>
+					  </thead>
+					  <tbody>
+						<tr *ngIf="travels.length == 0">
+							<td colspan="8" class="text-center">
+								<div class="alert alert-info" role="alert">
+									Not items in the shopping cart.
+								</div>
+							</td>
+						</tr>
+						<ng-container *ngIf="travels.length > 0">
+							<tr *ngFor="let travel of travels; let index = index">
+							  <th scope="row">{{index+1}}</th>
+							  <td>{{ travel.count }}</td>
+							  <td>{{ travel.description }}</td>
+							  <td *ngIf="!deviceMovil">{{ travel.typeName }}</td>
+							  <td *ngIf="!deviceMovil">{{ travel.timeTravel }} Hour(s)</td>
+							  <td>$ {{ travel.price }}</td>
+							  <!-- <td>$ {{ travel.price * travel.count }}</td> -->
+							  <td *ngIf="!deviceMovil">{{ travel.status }}</td>
+							  <td>
+								<button type="button" class="btn btn-primary">
+								  Rate: <span class="badge badge-light">{{ travel.rate }}</span>
+								  <span class="sr-only">Rate</span>
+								</button>
+							  </td>
+							  <td>
+							  
+								<span *ngIf="travel.status != 'Zavrseno'" class="badge badge-success" (click)="finishedCart(travel.id)">Finish</span>
+								<span *ngIf="travel.status != 'Zavrseno' && travel.status != 'Otkazano'" class="badge badge-warning" (click)="cancelCart(travel.id)">Cancel</span>
+								<span *ngIf="travel.status == 'Zavrseno'" class="badge badge-danger" (click)="deleteCart(travel.id)">Delete</span>
+								
+								<br *ngIf="travel.status == 'Zavrseno' && travel.rate == ''">
+								<div *ngIf="travel.status == 'Zavrseno' && travel.rate == ''" class="alert alert-success" role="alert">
+								  Rate<br>
+								  <span class="badge badge-info badge-sm" (click)="addRate(travel.id, 1)">1</span>
+								  <span class="badge badge-info badge-sm" (click)="addRate(travel.id, 2)">2</span>
+								  <span class="badge badge-info badge-sm" (click)="addRate(travel.id, 3)">3</span>
+								  <span class="badge badge-info badge-sm" (click)="addRate(travel.id, 4)">4</span>
+								  <span class="badge badge-info badge-sm" (click)="addRate(travel.id, 5)">5</span>
+								</div>
+								
+							  </td>
+							</tr>
+						</ng-container>
+					  </tbody>
+					</table>
+				</div>
+			</div>
+			<div class="card-footer text-right">
+				<button type="button" class="btn btn-primary">
+				  Total: <span class="badge badge-light">$ {{ total }}</span>
+				  <span class="sr-only">Total price</span>
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+

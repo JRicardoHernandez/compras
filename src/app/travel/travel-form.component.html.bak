@@ -1,0 +1,46 @@
+<div class="row m-3">
+	<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pt-3 pb-3 w-100">
+		<div class="card">
+			<form [formGroup]="travelForm">
+				<div class="card-body">
+					<div class="form-group">
+						<label for="typeName">Type</label>
+						<input type="text" formControlName="typeName" class="form-control" id="typeName" placeholder="Type">
+					</div>
+					<div class="form-group">
+						<label for="description">Description</label>
+						<input type="text" formControlName="description" class="form-control" id="description" placeholder="Description">
+					</div>
+					<div class="form-group">
+						<label for="distance">Distance</label>
+						<input type="number" formControlName="distance" class="form-control" id="distance" placeholder="Distance">
+					</div>
+					<div class="form-group">
+						<label for="price">Price</label>
+						<input type="number" formControlName="price" class="form-control" id="price" placeholder="Price">
+					</div>
+					<div class="form-group">
+						<label for="timeTravel">Time of Travel</label>
+						<input type="number" formControlName="timeTravel" class="form-control" id="timeTravel" placeholder="Time of Travel">
+					</div>
+					<div class="form-group">
+						<label for="status">Status</label>
+						<select class="form-control" formControlName="status" id="status">
+						  <option selected>Predstojece</option>
+						  <option>Otkazano</option>
+						  <option>Zavrseno</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="rate">Rate</label>
+						<textarea class="form-control" formControlName="rate" id="rate" placeholder="Rate">
+						</textarea>
+					</div>
+				</div>
+				<div class="card-footer">
+					<button type="button" class="btn btn-success" (click)="saveTravel()">Create</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

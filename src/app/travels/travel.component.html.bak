@@ -1,0 +1,122 @@
+			
+<div class="row m-3" *ngIf="idUser">
+	<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-right">
+		<button type="button" class="btn btn-warning btn-lg text-center" routerLink="/registration/{{idUser}}">Edit User</button>
+	</div>
+</div>
+
+<div class="row m-3">
+	<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pt-3 pb-3">
+		<h4>Short By</h4><br>
+		<button type="button" class="btn btn-info btn-lg text-center" (click)="orderBy('typeName', 'text')">Type</button>&nbsp;&nbsp;
+		<button type="button" class="btn btn-info btn-lg text-center" (click)="orderBy('destiny', 'text')">Destiny</button>&nbsp;&nbsp;
+		<button type="button" class="btn btn-info btn-lg text-center" (click)="orderBy('distance', 'number')">Distance</button>&nbsp;&nbsp;
+		<button type="button" class="btn btn-info btn-lg text-center" (click)="orderBy('timeTravel', 'number')">Time Of Travel</button>&nbsp;&nbsp;
+	</div>
+</div>
+		
+<div class="row m-3">
+	<div *ngFor="let travel of travels" class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 pt-3 pb-3">
+		<div class="card">
+			<div class="card-body">
+			  <button type="button" class="btn btn-primary btn-lg btn-block text-center">Information Travel</button>
+			</div>
+			<div class="card-body">
+				<div class="row">
+					<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+						<span>
+							Type:<strong>
+							{{ travel.typeName }}</strong>
+						</span>
+					</div>
+					<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+						<span>
+							Description:<strong>
+							{{ travel.description }}</strong>
+						</span>
+					</div>
+					<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+						<span>
+							Destiny:<strong>
+							{{ travel.destiny }}</strong>
+						</span>
+					</div>
+					<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+						<span>
+							Distance (km):<strong>
+							{{ travel.distance }}</strong>
+						</span>
+					</div>
+					<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+						<span>
+							Price:<strong>
+							$ {{ travel.price }}</strong>
+						</span>
+					</div>
+					<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+						<span>
+							Time of Travel:<strong>
+							{{ travel.timeTravel }} Hour(s)</strong>
+						</span>
+					</div>
+				</div>
+			</div>
+			<div class="card-body">
+				<form [formGroup]="commentForm">
+					<div class="form-group">
+						
+						<div class="btn-toolbar" style="width:100% !important;" role="toolbar" aria-label="Toolbar with button groups">
+						  <div class="btn-group mr-2 btn-group-sm" role="group" aria-label="First group">
+							<button type="button" class="btn btn-info" (click)="addRate(1)">1</button>
+							<button type="button" class="btn btn-info" (click)="addRate(2)">2</button>
+							<button type="button" class="btn btn-info" (click)="addRate(3)">3</button>
+							<button type="button" class="btn btn-info" (click)="addRate(4)">4</button>
+							<button type="button" class="btn btn-info" (click)="addRate(5)">5</button>
+						  </div>
+						</div>
+					
+					
+						<textarea class="form-control" formControlName="text" id="text" placeholder="Comment">
+						</textarea>
+					</div>
+					<button type="button" class="btn btn-success btn-lg btn-block text-center" (click)="addComment(travel.id)">+ Add Coment</button>
+				</form>
+				<br><br>
+				<button type="button" class="btn btn-info btn-lg btn-block text-center">Coments</button>
+			</div>
+			<div class="card-footer p-2" style="overflow-y: scroll;height: 200px !important;">
+				<ng-container *ngIf="travel.opinion; else not">
+					<div class="alert alert-info" role="alert" *ngIf="travel.opinion.length == 0">
+						Not comments.
+					</div>
+					<ng-container *ngIf="travel.opinion.length > 0">
+						<ul class="list-group" *ngFor="let opinion of travel.opinion">
+						  <li class="list-group-item p-0">
+							<div class="alert alert-info" role="alert">
+								{{ opinion.rate }}
+								{{ opinion.text }}
+								<br>
+							</div>
+							<ng-container *ngFor="let user of users">
+								<ng-container *ngIf="user.id == opinion.user">
+									User - {{user.name}}
+								</ng-container>
+							</ng-container>
+						  </li>
+						</ul>
+					</ng-container>
+				</ng-container>
+				<ng-template #not>
+					<div class="alert alert-info" role="alert">
+						Not comments.
+					</div>
+				</ng-template>
+			</div>
+			<div class="card-footer">
+				<button type="button" class="btn btn-warning mr-3" routerLink="/viaje-form/{{ travel.id }}">Edit</button>
+				<button type="button" class="btn btn-success" (click)="addCart(travel)">Reserve</button>
+			</div>
+		</div>
+	</div>
+</div>
+

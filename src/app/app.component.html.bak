@@ -1,0 +1,17 @@
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a routerLink="/travels">travels</a>
+  <a routerLink="/travel-form/new">Create Travel</a>
+  <a routerLink="/cart">Cart</a>
+  <a routerLink="/login">Login</a>
+  <a routerLink="/registration/registration">Registration</a>
+  <a (click)="removeSession()" *ngIf="idUser">Logout</a>
+</div>
+
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+  <span class="navbar-brand mb-0 h1" onclick="openNav()" style="cursor: pointer;">Menu</span>
+</nav>
+
+<div id="main">
+	<router-outlet></router-outlet>
+</div>

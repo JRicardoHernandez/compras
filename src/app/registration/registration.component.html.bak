@@ -1,0 +1,49 @@
+<div class="row m-3">
+	<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pt-3 pb-3 w-100">
+		<div class="card">
+			<form [formGroup]="userForm">
+				<div class="card-body">
+					<div class="form-group" *ngIf="!login">
+						<label for="name">Name</label>
+						<input type="text" formControlName="name" class="form-control" id="name" placeholder="Name">
+					</div>
+					<div class="form-group" *ngIf="!login">
+						<label for="typeName">Last Name</label>
+						<input type="text" formControlName="lastName" class="form-control" id="lastName" placeholder="Last Name">
+					</div>
+					<div class="form-group">
+						<label for="email">E-mail</label>
+						<input type="mail" formControlName="email" class="form-control" id="email" placeholder="E-mail">
+					</div>
+					<div class="form-group" *ngIf="!login">
+						<label for="tel">Phone</label>
+						<input type="tel" formControlName="tel" class="form-control" id="tel" placeholder="Phone">
+					</div>
+					<div class="form-group">
+						<label for="pass">Password</label>
+						<input type="password" formControlName="pass" class="form-control" id="pass" placeholder="Password">
+					</div>
+					<div class="form-group">
+						<label for="confirm">Confirm Password</label>
+						<input type="password" formControlName="confirm" class="form-control" id="confirm" placeholder="Confirm Password">
+					</div>
+				</div>
+				<div class="card-footer">
+					<button type="button" class="btn btn-success" (click)="saveAccount()">
+					<ng-container *ngIf="edit; else loginRegistration">
+						Save Changes
+					</ng-container>
+					<ng-template #loginRegistration>
+						<ng-container *ngIf="!login">
+							Create Account
+						</ng-container>
+						<ng-container *ngIf="login">
+							Login
+						</ng-container>
+					</ng-template>
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
